@@ -32,6 +32,10 @@ RUN make
 RUN make install
 
 # install R packages
+RUN R --vanilla -e "if (!requireNamespace('BiocManager', quietly = TRUE)) \
+install.packages('BiocManager')
+BiocManager::install('snpStats')"
+
 RUN R --vanilla -e 'install.packages(c("dplyr", "GenomicTools"), repos="http://cran.us.r-project.org")'
 
 # copy any one-off R scripts over
