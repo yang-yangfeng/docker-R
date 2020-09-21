@@ -32,8 +32,9 @@ RUN make
 RUN make install
 
 # install R packages
-RUN R --vanilla -e "source('https://bioconductor.org/biocLite.R'); biocLite('snpStats')"
-RUN R --vanilla -e "install.packages(c('dplyr', 'GenomicTools'), repos='http://cran.us.r-project.org')"
+RUN R --vanilla -e "install.packages('BiocManager')"
+RUN R --vanilla -e "BiocManager::install('snpStats')"
+RUN R --vanilla -e 'install.packages(c("dplyr", "GenomicTools"), repos="http://cran.us.r-project.org")'
 
 # copy any one-off R scripts over
 RUN mkdir -p /opt/scripts/R
