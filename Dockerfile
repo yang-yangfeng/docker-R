@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 
 # set variables
-ENV r_version 3.6.0
+ENV r_version 3.6.1
 
 # run update
 RUN apt-get update -y && apt-get install -y \
@@ -32,10 +32,8 @@ RUN make
 RUN make install
 
 # install R packages
-RUN R --vanilla -e 'install.packages(c("devtools", "BiocManager"), repos="http://cran.us.r-project.org")'
-RUN R --vanilla -e 'BiocManager::install(c("biomaRt", "copynumber", "GenVisR", "fgsea", "deseq2", "EBSeq", "BSgenome.Hsapiens.UCSC.hg19", "BSgenome.Hsapiens.UCSC.hg38", "TxDb.Hsapiens.UCSC.hg19.knownGene", "TxDb.Hsapiens.UCSC.hg38.knownGene", "org.Hs.eg.db", "NanoStringDiff"))'
-RUN R --vanilla -e 'install.packages(c("mdscore", "ggplot2", "data.table", "sequenza", "dplyr", "reshape2", "tidyr", "viridis", "cowplot", "ggalluvial", "msigdbr", "ggdendro", "gridExtra", "deconstructSigs", "tidyverse", "splitstackshape"), repos = "http://cran.us.r-project.org")'
+RUN R --vanilla -e 'install.packages(c("dplyr", "GenomicTools"), repos="http://cran.us.r-project.org")'
 
 # copy any one-off R scripts over
 RUN mkdir -p /opt/scripts/R
-COPY scripts/optitype2imgt.R /opt/scripts/R
+COPY scripts/var_bp_from_GTF.R /opt/scripts/R
