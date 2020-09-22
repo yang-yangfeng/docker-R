@@ -48,8 +48,8 @@ for(gene_i in 1:nrow(genes)){
   var_bp = unique(c(var_bp,gene_var_bp)) # just uniquing gradually to save memory; theoretically need to unique again since there might be repeats from other genes
   }
 n_var_bp = length(var_bp) # store denominator
-
+print(n_var_bp)
 write.table(results,paste("default_var_bp_from_GTF_results_",sub(".tsv","",gtf_filename),".tsv",sep=""),sep="\t",row.names = F,quote = F)
 writefile = file(paste("default_var_bp_from_GTF_n_var_bp_",sub(".tsv","",gtf_filename),".txt",sep=""))
-writeLines(n_var_bp, writefile)
+writeLines(as.character(n_var_bp), writefile)
 close(writefile)
